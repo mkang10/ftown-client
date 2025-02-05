@@ -2,6 +2,7 @@ const routes = {
   // Unauth routes
   home: "/",
   login: "/login",
+  signup: "signup",
   forgotPassword: "/forgot-password",
   notFound: "/404",
   // Dashboard routes
