@@ -39,6 +39,10 @@ const config = withPlugins([[withBundleAnalyzer({ enabled: env.ANALYZE })]], {
         protocol: "https",
         hostname: "scontent.fsgn2-11.fna.fbcdn.net",
       },
+      {
+        protocol: "https",
+        hostname: "theme.hstatic.net",
+      }
     ],
   },
 })
