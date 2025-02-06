@@ -31,6 +31,14 @@ const config = withPlugins([[withBundleAnalyzer({ enabled: env.ANALYZE })]], {
         protocol: "https",
         hostname: "images.pexels.com",
       },
+      {
+        protocol: "https",
+        hostname: "cdn.shopify.com",
+      },
+      {
+        protocol: "https",
+        hostname: "scontent.fsgn2-11.fna.fbcdn.net",
+      },
     ],
   },
 })
