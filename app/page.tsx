@@ -3,6 +3,7 @@ import Footer from "@/components/Footer/Footer";
 import Banner from "@/components/Banner/Banner";
 import BestSeller from "@/components/BestSeller/BestSeller";
 import Styling from "@/components/Styling/Styling";
+import PromotionCode from "@/components/PromotionCode/PromotionCode";
 
 
 export default function Page() {
@@ -14,6 +15,7 @@ export default function Page() {
         {/* Nội dung khác */}
         <BestSeller></BestSeller>
         <Styling />
+        <PromotionCode></PromotionCode>
       </main>
       <Footer />
     </div>

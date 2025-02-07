@@ -19,7 +19,7 @@ const stylingProducts = [
   {
     id: 4,
     name: "Funkytown® 05 Jersey/ White",
-    image: "https://levents.asia/cdn/shop/files/1_996818d1-841f-4a72-94ca-f85596e25b58.png?v=1700223338&width=700",
+    image: "https://levents.asia/cdn/shop/articles/STYLING_LOOK_1.1.jpg?v=1710481415",
   },
 ];
 
