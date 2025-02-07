@@ -4,6 +4,7 @@ import Banner from "@/components/Banner/Banner"
 import BestSeller from "@/components/BestSeller/BestSeller"
 import Styling from "@/components/Styling/Styling"
 import PromotionCode from "@/components/PromotionCode/PromotionCode"
+import Advertise from "@/components/Advertise/Advertise"
 
 export default function Page() {
   return (
@@ -15,6 +16,7 @@ export default function Page() {
         <BestSeller></BestSeller>
         <Styling />
         <PromotionCode></PromotionCode>
+        <Advertise></Advertise>
       </main>
       <Footer />
     </div>
