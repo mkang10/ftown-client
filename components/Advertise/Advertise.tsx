@@ -1,6 +1,6 @@
 export default function Advertise() {
     return (
-      <div className="mt-12 flex items-center rounded-xl bg-gray-100 p-12">
+      <div className="mt-12 flex items-center bg-gray-100 p-12">
         {/* Video bên trái */}
         <div className="relative mr-12 h-[400px] w-[700px]">
           <video

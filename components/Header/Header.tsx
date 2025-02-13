@@ -1,30 +1,30 @@
-"use client"
-import { useState, useEffect } from "react"
-import { Input, Menu, Dropdown } from "antd"
-import { SearchOutlined, ShoppingCartOutlined, HeartOutlined, DownOutlined, UserOutlined } from "@ant-design/icons"
-import Link from "next/link"
+"use client";
+import { useState, useEffect } from "react";
+import { Input, Menu, Dropdown } from "antd";
+import { SearchOutlined, ShoppingCartOutlined, HeartOutlined, UserOutlined } from "@ant-design/icons";
+import Link from "next/link";
 
 export default function Header() {
-  const [showLogo, setShowLogo] = useState(false)
+  const [showLogo, setShowLogo] = useState(false);
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setShowLogo((prev) => !prev)
-    }, 3000) // Chuyển đổi mỗi 3 giây
+      setShowLogo((prev) => !prev);
+    }, 3000);
 
-    return () => clearInterval(interval) // Dọn dẹp khi component unmount
-  }, [])
+    return () => clearInterval(interval);
+  }, []);
 
   const shopMenu = (
-    <Menu>
-      <Menu.Item key="tops">Tops</Menu.Item>
-      <Menu.Item key="bottoms">Bottoms</Menu.Item>
-      <Menu.Item key="accessories">Accessories</Menu.Item>
-      <Menu.Item key="bags">Bags</Menu.Item>
-      <Menu.Item key="womenswear">Womenswear</Menu.Item>
-      <Menu.Item key="restocks">Restocks</Menu.Item>
-    </Menu>
-  )
+    <div className="absolute left-0 top-full hidden w-44 rounded-md bg-black text-white shadow-lg group-hover:block">
+      <Link href="/tops" className="block px-4 py-2 hover:bg-gray-700">Tops</Link>
+      <Link href="/bottoms" className="block px-4 py-2 hover:bg-gray-700">Bottoms</Link>
+      <Link href="/accessories" className="block px-4 py-2 hover:bg-gray-700">Accessories</Link>
+      <Link href="/bags" className="block px-4 py-2 hover:bg-gray-700">Bags</Link>
+      <Link href="/womenswear" className="block px-4 py-2 hover:bg-gray-700">Womenswear</Link>
+      <Link href="/restocks" className="block px-4 py-2 hover:bg-gray-700">Restocks</Link>
+    </div>
+  );
 
   const userMenu = (
     <Menu>
@@ -35,12 +35,12 @@ export default function Header() {
         <Link href="/login">Login</Link>
       </Menu.Item>
     </Menu>
-  )
+  );
 
   return (
     <header className="fixed left-0 top-0 z-10 w-full bg-white shadow-md">
       <div className="container mx-auto flex items-center justify-between px-6 py-4">
-        {/* Logo chuyển động */}
+        {/* Logo */}
         <div className="relative flex h-12 w-48 items-center justify-center">
           <Link href="/" className="absolute left-0 top-0 flex h-full w-full items-center justify-center">
             <div className={`absolute transition-opacity duration-700 ${showLogo ? "opacity-0" : "opacity-100"}`}>
@@ -57,39 +57,41 @@ export default function Header() {
         </div>
 
         {/* Navigation */}
-        <Menu mode="horizontal" className="hidden space-x-6 border-none md:flex">
-          {/* <Menu.Item key="home" className="font-medium border-b-2">
-            <Link href="/">Home</Link>
-          </Menu.Item> */}
+        <nav>
+          <ul className="flex space-x-8">
+            <li className="group relative">
+              <Link href="/product" className="relative font-medium text-black">
+                Shop
+                <span className="absolute left-0 bottom-[-5px] block h-[2px] w-full bg-black scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></span>
+              </Link>
+              {shopMenu}
+            </li>
+            <li>
+              <Link href="/contact" className="relative font-medium text-black hover:underline">Contact</Link>
+            </li>
+            <li>
+              <Link href="/aboutus" className="relative font-medium text-black hover:underline">About Us</Link>
+            </li>
+            <li>
+              <Link href="/aichat" className="relative font-medium text-black hover:underline">AI Chat</Link>
+            </li>
+          </ul>
+        </nav>
 
-          {/* Dropdown cho Shop */}
-          <Dropdown overlay={shopMenu} trigger={["hover"]}>
-            <Menu.Item key="shop" className="flex items-center font-medium">
-              Shop <DownOutlined className="ml-1 text-xs" />
-            </Menu.Item>
-          </Dropdown>
-
-          <Menu.Item key="contact" className="font-medium">
-            <Link href="/contact">Contact</Link>
-          </Menu.Item>
-          <Menu.Item key="about" className="font-medium">
-            <Link href="/aboutus">About Us</Link>
-          </Menu.Item>
-          <Menu.Item key="aichat" className="font-medium">
-            <Link href="/aichat">AI Chat</Link>
-          </Menu.Item>
-        </Menu>
-
-        {/* Search Bar & Icons */}
+        {/* Search and Icons */}
         <div className="flex items-center space-x-4">
           <Input placeholder="What are you looking for?" prefix={<SearchOutlined />} className="w-60 rounded-full" />
+         <Link href="/favorite">
           <HeartOutlined className="cursor-pointer text-xl hover:text-black" />
-          <ShoppingCartOutlined className="cursor-pointer text-xl hover:text-black" />
+          </Link>
+          <Link href="/cart">
+            <ShoppingCartOutlined className="cursor-pointer text-xl hover:text-black" />
+          </Link>
           <Dropdown overlay={userMenu} trigger={["click"]}>
             <UserOutlined className="cursor-pointer text-xl hover:text-black" />
           </Dropdown>
         </div>
       </div>
     </header>
-  )
+  );
 }
