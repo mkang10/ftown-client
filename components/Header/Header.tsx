@@ -87,9 +87,14 @@ export default function Header() {
           <Link href="/cart">
             <ShoppingCartOutlined className="cursor-pointer text-xl hover:text-black" />
           </Link>
-          <Dropdown overlay={userMenu} trigger={["click"]}>
+          <Dropdown overlay={userMenu} trigger={["hover"]}>
+            <div className="relative flex items-center">
+             <Link href="/profile">
             <UserOutlined className="cursor-pointer text-xl hover:text-black" />
+            </Link>
+            </div>
           </Dropdown>
+
         </div>
       </div>
     </header>
