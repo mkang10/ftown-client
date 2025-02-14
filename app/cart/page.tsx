@@ -2,97 +2,91 @@
 import Header from "@/components/Header/Header";
 import Footer from "@/components/Footer/Footer";
 import { useState } from "react";
+import Link from "next/link";
+
 
 export default function CartPage() {
-  const [cart, setCart] = useState([
-    { id: 1, name: "T-shirt", price: 650, quantity: 1, image: "https://cdn.shopify.com/s/files/1/0681/2821/1221/files/White_LTSSOCOA201UW0101SS25_1_533x.jpg?v=1737370837" },
-    { id: 2, name: "T-shirt", price: 550, quantity: 2, image: "https://cdn.shopify.com/s/files/1/0681/2821/1221/files/White_LTSSOCOA201UW0101SS25_1_533x.jpg?v=1737370837" },
-  ]);
+  const [cart, setCart] = useState<{
+    id: number;
+    name: string;
+    size: string;
+    price: number;
+    quantity: number;
+    image: string;
+  }[]>(Array.from({ length: 10 }, (_, index) => ({
+    id: index + 1,
+    name: "'Maswe' Play To Win Hoodie - Grey",
+    size: "M",
+    price: 720000,
+    quantity: 2,
+    image: "https://cdn.shopify.com/s/files/1/0681/2821/1221/files/White_LTSSOCOA201UW0101SS25_1_533x.jpg?v=1737370837",
+  })));
 
   const updateQuantity = (id: number, quantity: number) => {
     setCart(cart.map(item => (item.id === id ? { ...item, quantity } : item)));
   };
 
+  const removeItem = (id: number) => {
+    setCart(cart.filter(item => item.id !== id));
+  };
+
   const subtotal = cart.reduce((acc, item) => acc + item.price * item.quantity, 0);
 
   return (
-    <div className="flex min-h-screen flex-col bg-gray-100">
-      <Header />
-      <main className="flex flex-1 justify-center pt-20">
-        <div className="container mx-auto p-6">
-          <h2 className="text-lg text-gray-500 mb-4">Home / Cart</h2>
-
+    <div className="flex flex-col min-h-screen bg-white">
+      <div className="fixed top-0 left-0 w-full bg-white shadow-md z-50">
+        <Header />
+      </div>
+      <main className="flex flex-1 justify-center pt-24 px-6 overflow-y-auto">
+        <div className="container mx-auto flex flex-col md:flex-row gap-6">
           {/* Cart Table */}
-          <div className="bg-white p-6 shadow-md">
+          <div className="w-full md:w-2/3 bg-white shadow-lg p-6">
+            <h2 className="text-2xl font-bold mb-4">GIỎ HÀNG</h2>
             <table className="w-full text-left border-collapse">
               <thead>
-                <tr className="bg-gray-100 border-b">
-                  <th className="p-3">Product</th>
-                  <th className="p-3">Price</th>
-                  <th className="p-3">Quantity</th>
-                  <th className="p-3">Subtotal</th>
+                <tr className="border-b text-gray-700">
+                  <th className="p-3">Sản phẩm</th>
+                  <th className="p-3">Số lượng</th>
+                  <th className="p-3">Tổng tiền</th>
+                  <th className="p-3">Xóa</th>
                 </tr>
               </thead>
               <tbody>
                 {cart.map((item) => (
-                  <tr key={item.id} className="border-b">
-                    <td className="flex items-center gap-3 p-3">
-                      <img src={item.image} alt={item.name} className="w-12 h-12" />
-                      {item.name}
+                  <tr key={item.id} className="border-b text-gray-800">
+                    <td className="flex items-center gap-4 p-3">
+                      <img src={item.image} alt={item.name} className="w-20 h-20 object-cover" />
+                      <div>
+                        <p>{item.name}</p>
+                        <p className="text-gray-500">Size {item.size}</p>
+                        <p className="text-gray-700 font-semibold">{item.price.toLocaleString()}₫</p>
+                      </div>
                     </td>
-                    <td className="p-3">${item.price}</td>
-                    <td className="p-3">
-                      <select
-                        className="p-2 border"
-                        value={item.quantity}
-                        onChange={(e) => updateQuantity(item.id, parseInt(e.target.value))}
-                      >
-                        {[1, 2, 3, 4, 5].map((num) => (
-                          <option key={num} value={num}>
-                            {num}
-                          </option>
-                        ))}
-                      </select>
+                    <td className="p-3 flex items-center">
+                      <button onClick={() => updateQuantity(item.id, item.quantity - 1)} className="px-3 py-1 border">-</button>
+                      <span className="px-4">{item.quantity}</span>
+                      <button onClick={() => updateQuantity(item.id, item.quantity + 1)} className="px-3 py-1 border">+</button>
                     </td>
-                    <td className="p-3">${item.price * item.quantity}</td>
+                    <td className="p-3 font-semibold">{(item.price * item.quantity).toLocaleString()}₫</td>
+                    <td className="p-3 cursor-pointer" onClick={() => removeItem(item.id)}>
+                      <span className="text-gray-500 hover:text-red-600">🗑</span>
+                    </td>
                   </tr>
                 ))}
               </tbody>
             </table>
+           
+            <Link href="/product"> <button className="mt-6 px-6 py-2 bg-black text-white font-semibold">TIẾP TỤC MUA SẮM</button></Link>
+
           </div>
 
-          {/* Buttons */}
-          <div className="flex justify-between mt-6">
-            <button className="px-4 py-2 border rounded-lg">Return To Shop</button>
-            <button className="px-4 py-2 border rounded-lg">Update Cart</button>
-          </div>
-
-          {/* Coupon & Cart Total */}
-          <div className="grid grid-cols-2 gap-8 mt-6">
-            {/* Coupon */}
-            <div className="flex items-center space-x-4">
-              <input type="text" placeholder="Coupon Code" className="p-3 w-full bg-gray-100 border" />
-              <button className="bg-gray-500 text-white px-4 py-3 border rounded-lg">
-                Apply Coupon
-              </button>
-            </div>
-
-            {/* Cart Summary */}
-            <div className="p-6 shadow-md bg-white">
-              <h3 className="text-lg font-semibold mb-4">Cart Total</h3>
-              <p className="flex justify-between mb-2">
-                <span>Subtotal:</span> <span>${subtotal}</span>
-              </p>
-              <p className="flex justify-between mb-2">
-                <span>Shipping:</span> <span>Free</span>
-              </p>
-              <p className="flex justify-between font-semibold text-lg">
-                <span>Total:</span> <span>${subtotal}</span>
-              </p>
-              <button className="bg-gray-500 text-white w-full mt-4 py-3 border rounded-lg">
-                Proceed to checkout
-              </button>
-            </div>
+          {/* Cart Summary */}
+          <div className="w-full md:w-1/3 bg-white shadow-lg p-6">
+            <h3 className="text-xl font-bold mb-4">Tổng tiền</h3>
+            <p className="flex justify-between text-lg font-semibold">
+              <span>Tổng tiền</span> <span>{subtotal.toLocaleString()}₫</span>
+            </p>
+            <button className="mt-6 w-full px-6 py-3 bg-black text-white font-semibold text-lg">THANH TOÁN</button>
           </div>
         </div>
       </main>
