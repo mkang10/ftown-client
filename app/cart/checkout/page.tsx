@@ -1,12 +1,16 @@
 "use client";
 import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
+import axios from "axios";
 import Header from "@/components/Header/Header";
 import Footer from "@/components/Footer/Footer";
 
 export default function CheckOutPage() {
   const router = useRouter();
-  const { searchParams } = new URL(window.location.href);
+  const searchParams = useSearchParams(); // ✅ Dùng useSearchParams để lấy query parameters
+  const [paymentMethod, setPaymentMethod] = useState<string | null>(null);
+
+  // Lấy danh sách variantIds từ URL
   const variantString = searchParams.get("variants");
   const variantIds: number[] = variantString ? JSON.parse(decodeURIComponent(variantString)) as number[] : [];
 
@@ -15,8 +19,9 @@ export default function CheckOutPage() {
       <Header />
       <main className="flex flex-1 justify-center pt-20 px-6">
         <div className="container mx-auto flex flex-col md:flex-row gap-8 bg-white shadow-lg p-6 rounded-lg">
+          
           {/* Product Summary */}
-          <div className="w-full md:w-1/2 bg-gray-50 p-6 rounded-lg border border-gray-200">
+          <div className="w-full md:w-1/2 bg-gray-50 p-6 border border-gray-200">
             <h3 className="text-xl font-bold mb-4">Sản phẩm của bạn</h3>
             {variantIds.length > 0 ? (
               variantIds.map((variant, index) => (
@@ -39,7 +44,7 @@ export default function CheckOutPage() {
           </div>
 
           {/* Checkout Form */}
-          <div className="w-full md:w-1/2 bg-white p-6 rounded-lg shadow border border-gray-200">
+          <div className="w-full md:w-1/2 bg-white p-6 shadow border border-gray-200">
             <h2 className="text-2xl font-bold mb-6 text-center">CHECKOUT</h2>
             <h3 className="text-xl font-semibold mb-4">THÔNG TIN GIAO HÀNG</h3>
             
@@ -64,15 +69,45 @@ export default function CheckOutPage() {
               <h3 className="text-xl font-semibold mb-4">Phương thức thanh toán</h3>
               <div className="mb-4">
                 <label className="block">
-                  <input type="radio" name="payment" className="mr-2" /> Ví MoMo
+                  <input 
+                    type="radio" 
+                    name="payment" 
+                    className="mr-2" 
+                    value="momo"
+                    onChange={() => setPaymentMethod("momo")}
+                  /> Ví MoMo
                 </label>
                 <label className="block">
-                  <input type="radio" name="payment" className="mr-2" /> Thẻ ATM nội địa
+                  <input 
+                    type="radio" 
+                    name="payment" 
+                    className="mr-2" 
+                    value="bank"
+                    onChange={() => setPaymentMethod("bank")}
+                  /> Thanh toán ngân hàng
                 </label>
                 <label className="block">
-                  <input type="radio" name="payment" className="mr-2" /> Thanh toán Visa/MasterCard
+                  <input 
+                    type="radio" 
+                    name="payment" 
+                    className="mr-2" 
+                    value="visa"
+                    onChange={() => setPaymentMethod("visa")}
+                  /> Thanh toán Visa/MasterCard
                 </label>
               </div>
+
+              {/* Hiển thị QR Code nếu chọn Thanh toán ngân hàng */}
+              {paymentMethod === "bank" && (
+                <div className="mb-6 text-center">
+                  <h3 className="text-lg font-semibold mb-2">Quét mã QR để thanh toán</h3>
+                  <img 
+                    src="https://payos.vn/path-to-your-qr-code.png" 
+                    alt="QR Code PayOS" 
+                    className="w-48 h-48 mx-auto border border-gray-300 rounded-lg"
+                  />
+                </div>
+              )}
 
               <h3 className="text-xl font-semibold mb-4">Tóm tắt đơn hàng</h3>
               <p className="flex justify-between text-lg font-semibold">
