@@ -37,7 +37,7 @@ export default function Header() {
   );
 
   return (
-    <header className="fixed left-0 top-0 z-10 w-full bg-white shadow-md">
+    <header className="fixed left-0 top-0 z-50 w-full bg-[#F5F5F2B3] shadow-md">
       <div className="container mx-auto flex items-center justify-between px-6 py-4">
         {/* Logo */}
         <div className="relative flex h-12 w-48 items-center justify-center">

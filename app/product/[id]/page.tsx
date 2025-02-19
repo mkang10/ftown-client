@@ -1,27 +1,48 @@
+"use client"
 import { notFound } from "next/navigation";
+import { useState } from "react";
 import Header from "@/components/Header/Header";
 import Footer from "@/components/Footer/Footer";
 import BestSeller from "@/components/BestSeller/BestSeller";
 const products = [
-  { id: 1, name: "DC x The Underdogs T-shirt Black", image: "https://cdn.shopify.com/s/files/1/0681/2821/1221/files/White_LTSSOCOA201UW0101SS25_1_533x.jpg?v=1737370837", price: 399000, sizes: ["S", "M", "L", "XL"], tags: ["Collab", "Pre order"], description: "Chất liệu: Cotton.\nRelaxed Fit.\nToàn bộ artwork trên áo được áp dụng kĩ thuật in lụa." },
+  { 
+    id: 1, 
+    name: "Dream Maker Semi-Oversized Tee", 
+    images: [
+      "https://cdn.shopify.com/s/files/1/0681/2821/1221/files/White_LTSSOCOA201UW0101SS25_1_533x.jpg?v=1737370837",
+      "https://levents.asia/cdn/shop/files/Black_LTSSOCOA201UD0101SS25_1.jpg?v=1737370616&width=713",
+      "https://levents.asia/cdn/shop/files/Red_LTSSOCOA201UR0101SS25_1.jpg?v=1737370812&width=713",
+      "https://levents.asia/cdn/shop/files/Pink_LTSSOCOA201UP0101SS25_1.jpg?v=1737370653&width=713",
+    ], 
+    price: 399000, 
+    sizes: ["S", "M", "L", "XL"], 
+    tags: ["Collab", "Pre order"], 
+    description: "Chất liệu: Cotton.\nRelaxed Fit.\nToàn bộ artwork trên áo được áp dụng kĩ thuật in lụa." 
+  },
 ];
 
 export default function ProductDetail({ params }: { params: { id: string } }) {
   const product = products.find((p) => p.id === Number(params.id));
+  const [selectedImage, setSelectedImage] = useState(product?.images[0] || "");
 
   if (!product) return notFound();
-
   return (
     <div className="flex min-h-screen flex-col">
-      <Header />
-      <main className="flex-1 px-6 pt-20 lg:px-20">
+      <Header  />
+      <main className="flex-1 px-6 pt-24 lg:px-20">
         <div className="max-w-6xl mx-auto flex flex-col md:flex-row gap-10">
           {/* Hình ảnh sản phẩm */}
           <div className="flex-1">
-            <img src={product.image} alt={product.name} className="w-full" />
+            <img src={selectedImage} alt={product.name} className="w-full border " />
             <div className="flex mt-4 space-x-2">
-              {[...Array(5)].map((_, index) => (
-                <img key={index} src={product.image} alt={`Thumb ${index}`} className="w-16 h-16 border" />
+              {product.images.map((image, index) => (
+                <img 
+                  key={index} 
+                  src={image} 
+                  alt={`Thumb ${index}`} 
+                  className={`w-16 h-16 border cursor-pointer  ${selectedImage === image ? "border-2 border-gray" : ""}`}
+                  onClick={() => setSelectedImage(image)} 
+                />
               ))}
             </div>
           </div>
