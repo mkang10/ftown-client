@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Header from "@/components/Header/Header";
 import Footer from "@/components/Footer/Footer";
-
+import BestSeller from "@/components/BestSeller/BestSeller";
 const products = [
   { id: 1, name: "Bandana", image: "https://cdn.shopify.com/s/files/1/0681/2821/1221/files/White_LTSSOCOA201UW0101SS25_1_533x.jpg?v=1737370837", price: 390000, tags: ["Collab"], size: "M", color: "Black" },
   { id: 2, name: "Black T-shirt", image: "https://cdn.shopify.com/s/files/1/0681/2821/1221/files/White_LTSSOCOA201UW0101SS25_1_533x.jpg?v=1737370837", price: 739000, tags: ["Pre order"], size: "L", color: "Black" },
@@ -77,6 +77,7 @@ export default function ProductPage() {
             </div>
           ))}
         </div>
+        <BestSeller></BestSeller>
       </main>
       <Footer />
     </div>

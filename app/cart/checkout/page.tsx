@@ -97,17 +97,12 @@ export default function CheckOutPage() {
                 </label>
               </div>
 
-              {/* Hiển thị QR Code nếu chọn Thanh toán ngân hàng */}
-              {paymentMethod === "bank" && (
-                <div className="mb-6 text-center">
-                  <h3 className="text-lg font-semibold mb-2">Quét mã QR để thanh toán</h3>
-                  <img 
-                    src="https://payos.vn/path-to-your-qr-code.png" 
-                    alt="QR Code PayOS" 
-                    className="w-48 h-48 mx-auto border border-gray-300 rounded-lg"
-                  />
-                </div>
-              )}
+             
+             
+               
+                <h3 className="text-lg font-semibold mb-2">Thanh toán  ngân hànghàng</h3>
+                  
+            
 
               <h3 className="text-xl font-semibold mb-4">Tóm tắt đơn hàng</h3>
               <p className="flex justify-between text-lg font-semibold">

@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import Header from "@/components/Header/Header";
 import Footer from "@/components/Footer/Footer";
-
+import BestSeller from "@/components/BestSeller/BestSeller";
 const products = [
   { id: 1, name: "DC x The Underdogs T-shirt Black", image: "https://cdn.shopify.com/s/files/1/0681/2821/1221/files/White_LTSSOCOA201UW0101SS25_1_533x.jpg?v=1737370837", price: 399000, sizes: ["S", "M", "L", "XL"], tags: ["Collab", "Pre order"], description: "Chất liệu: Cotton.\nRelaxed Fit.\nToàn bộ artwork trên áo được áp dụng kĩ thuật in lụa." },
 ];
@@ -64,6 +64,7 @@ export default function ProductDetail({ params }: { params: { id: string } }) {
             </div>
           </div>
         </div>
+        <BestSeller></BestSeller>
       </main>
       <Footer />
     </div>
