@@ -1,9 +1,8 @@
 "use client";
-import { useState, useEffect } from "react";
-import { Input, Menu, Dropdown } from "antd";
-import { SearchOutlined, ShoppingCartOutlined, HeartOutlined, UserOutlined } from "@ant-design/icons";
+import { HeartOutlined, SearchOutlined, ShoppingCartOutlined, UserOutlined } from "@ant-design/icons";
+import { Dropdown, Image, Input, Menu } from "antd";
 import Link from "next/link";
-
+import {  useEffect, useState } from "react";
 export default function Header() {
   const [showLogo, setShowLogo] = useState(false);
 
@@ -47,12 +46,12 @@ export default function Header() {
               <h1 className="whitespace-nowrap text-xl font-bold">FUNKYTOWN GALLERY</h1>
             </div>
             <div className={`absolute transition-opacity duration-700 ${showLogo ? "opacity-100" : "opacity-0"}`}>
-              <img
-                src="https://scontent.fsgn2-11.fna.fbcdn.net/v/t39.30808-6/294967582_483877957073072_9134088128489220848_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=SOfKMtednXUQ7kNvgH4Ii8q&_nc_oc=AdhGhAAlPRgOCS7Y1lIFo7-r8UGtcaiysDKSgYsqbylIFGU3pfsHszymBRsyDf3OQx0Fs3TEWGUthgUL4NVr6k5x&_nc_zt=23&_nc_ht=scontent.fsgn2-11.fna&_nc_gid=A3ntB6ugd-V92hU2tzibAol&oh=00_AYBRzPp_jsJPCf8-m3JrQs0bB7GwMGOG3alsLA1WCj7O-Q&oe=67AA9921"
-                alt="Logo"
-                className="h-auto w-16 object-contain"
-              />
-            </div>
+      <Image
+        src="https://scontent.fsgn5-9.fna.fbcdn.net/v/t39.30808-6/294967582_483877957073072_9134088128489220848_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=1F6kZUusFFgQ7kNvgHcklYS&_nc_oc=AdiAD6AO2CuVkGJoamhhvDiwXlc8V-JsL9YF6QzsEKUFd3x9QthETTOTsX17uHrk3hE&_nc_zt=23&_nc_ht=scontent.fsgn5-9.fna&_nc_gid=AEfFyrPUwSWdJ7ct-PCwpch&oh=00_AYDoj1kL8xPOsAH39VN10DfYMvWeKdQyN2ejdlLmrSiByQ&oe=67BB8461"
+        alt="Logo"
+        className="max-h-10 max-w-10 object-contain"
+      />
+    </div>
           </Link>
         </div>
 

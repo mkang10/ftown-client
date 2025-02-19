@@ -1,12 +1,14 @@
 "use client";
+import {  Image } from "antd";
+import { useSearchParams } from "next/navigation";
 import { useState } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
-import axios from "axios";
-import Header from "@/components/Header/Header";
+//import axios from "axios";
 import Footer from "@/components/Footer/Footer";
 
+import Header from "@/components/Header/Header";
+
 export default function CheckOutPage() {
-  const router = useRouter();
+ // const router = useRouter();
   const searchParams = useSearchParams(); // ✅ Dùng useSearchParams để lấy query parameters
   const [paymentMethod, setPaymentMethod] = useState<string | null>(null);
 
@@ -26,7 +28,7 @@ export default function CheckOutPage() {
             {variantIds.length > 0 ? (
               variantIds.map((variant, index) => (
                 <div key={index} className="flex items-center gap-6 p-4 bg-white shadow rounded-lg mb-4">
-                  <img 
+                  <Image
                     src="https://cdn.shopify.com/s/files/1/0681/2821/1221/files/White_LTSSOCOA201UW0101SS25_1_533x.jpg?v=1737370837" 
                     alt="Sản phẩm" 
                     className="w-24 h-24 object-cover rounded-md border border-gray-300" 
@@ -100,7 +102,9 @@ export default function CheckOutPage() {
              
              
                
-                <h3 className="text-lg font-semibold mb-2">Thanh toán  ngân hànghàng</h3>
+                <h3 className="text-lg font-semibold mb-2">Thanh toán ngân hàng</h3>
+                <h3 className="text-lg font-semibold mb-2">Thanh toán sau khi nhận hàng</h3>
+
                   
             
 
